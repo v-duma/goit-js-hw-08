@@ -1,8 +1,9 @@
+import lodash from 'lodash';
+
 const form = document.querySelector('.feedback-form');
 const email = document.querySelector('input');
 const message = document.querySelector('textarea');
 const state = localStorage.getItem('feedback-form-state');
-const lodash = require('lodash');
 
 const updateState = lodash.throttle(() => {
   const state = {
@@ -27,10 +28,15 @@ if (state) {
 
 form.addEventListener('submit', event => {
   event.preventDefault();
+ const savedValue = {
+    email: email.value,
+    message: message.value,
+  };
+
+  console.log(savedValue);
+
+  localStorage.clear();
 
   email.value = '';
   message.value = '';
-
-  localStorage.clear();
-  console.log(state);
 });
